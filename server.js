@@ -1,143 +1,126 @@
 const express = require("express");
 const app = express();
 
-const powers = [
-  {
-    icon: "⚡",
-    service: "Azure Functions",
-    description: "You work best under pressure and only wake up when needed."
-  },
-  {
-    icon: "🛡️",
-    service: "Azure Firewall",
-    description: "You trust nobody, but everyone is safer because of you."
-  },
-  {
-    icon: "🤖",
-    service: "Azure OpenAI",
-    description: "Everyone asks you questions instead of reading the documentation."
-  },
-  {
-    icon: "🚢",
-    service: "Azure Kubernetes Service",
-    description: "Complicated on the inside, impressive on the outside."
-  },
-  {
-    icon: "💾",
-    service: "Azure Storage",
-    description: "You remember everything."
-  },
-  {
-    icon: "☁️",
-    service: "Azure Virtual Machines",
-    description: "The dependable workhorse that carries the business."
-  },
-  {
-    icon: "🔑",
-    service: "Azure Key Vault",
-    description: "Keeper of secrets and protector of passwords."
-  },
-  {
-    icon: "📊",
-    service: "Microsoft Fabric",
-    description: "You connect everything together and somehow make sense of it."
-  }
+const version = "v2.0";
+
+const facts = [
+  "Azure operates in more than 60 regions worldwide.",
+  "Azure Functions is serverless.",
+  "Azure Storage can store exabytes of data.",
+  "Azure App Service supports Node.js, .NET, Java, Python, and PHP.",
+  "Microsoft Fabric unifies data and analytics workloads.",
+  "Azure OpenAI provides access to powerful AI models."
 ];
 
 app.get("/", (req, res) => {
 
-  const power = powers[Math.floor(Math.random() * powers.length)];
+    const fact = facts[Math.floor(Math.random() * facts.length)];
 
-  res.send(`
-  <!DOCTYPE html>
-  <html>
-  <head>
-      <title>Azure Superpower Generator</title>
+    res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Azure Superpower Generator</title>
 
-      <style>
+<style>
 
-          body{
-              margin:0;
-              font-family:'Segoe UI',sans-serif;
-              background: linear-gradient(135deg,#0078D4,#50E6FF);
-              height:100vh;
-              display:flex;
-              justify-content:center;
-              align-items:center;
-          }
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0078D4,#50E6FF);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-          .card{
-              background:white;
-              padding:40px;
-              border-radius:20px;
-              text-align:center;
-              width:700px;
-              box-shadow:0 10px 25px rgba(0,0,0,.2);
-          }
+.container{
+    background:white;
+    width:800px;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
 
-          h1{
-              color:#0078D4;
-          }
+.badge{
+    display:inline-block;
+    background:#16a34a;
+    color:white;
+    padding:8px 16px;
+    border-radius:20px;
+    font-weight:bold;
+}
 
-          .icon{
-              font-size:80px;
-          }
+.version{
+    margin-top:10px;
+    color:#666;
+}
 
-          .service{
-              font-size:32px;
-              font-weight:bold;
-              color:#0078D4;
-          }
+.fact{
+    margin-top:30px;
+    background:#f3f4f6;
+    padding:20px;
+    border-radius:10px;
+}
 
-          .description{
-              margin-top:20px;
-              font-size:20px;
-              color:#444;
-          }
+button{
+    margin-top:20px;
+    border:none;
+    background:#0078D4;
+    color:white;
+    padding:14px 30px;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
 
-          button{
-              margin-top:30px;
-              padding:15px 30px;
-              border:none;
-              background:#0078D4;
-              color:white;
-              border-radius:10px;
-              cursor:pointer;
-              font-size:18px;
-          }
+button:hover{
+    background:#005a9e;
+}
 
-      </style>
+</style>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-      <div class="card">
+<div class="container">
 
-          <h1>☁️ What's Your Azure Superpower?</h1>
+    <div class="badge">
+        🚀 Successfully Deployed from GitHub
+    </div>
 
-          <div class="icon">${power.icon}</div>
+    <h1>☁️ Azure App Service Demo</h1>
 
-          <div class="service">${power.service}</div>
+    <h2>CI/CD Test Website</h2>
 
-          <div class="description">
-              ${power.description}
-          </div>
+    <div class="version">
+        Application Version: <strong>${version}</strong>
+    </div>
 
-          <button onclick="window.location.reload()">
-              Discover Another Superpower
-          </button>
+    <div class="version">
+        Server Time: ${new Date().toUTCString()}
+    </div>
 
-      </div>
+    <div class="fact">
+        <h3>Azure Fact of the Day</h3>
+        <p>${fact}</p>
+    </div>
 
-  </body>
-  </html>
-  `);
+    <button onclick="location.reload()">
+        Generate New Fact
+    </button>
 
+</div>
+
+</body>
+</html>
+`);
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+    console.log("Application running on port " + PORT);
 });
